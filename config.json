@@ -1,0 +1,7 @@
+{
+  "name": "CTFd Solve FX",
+  "route": "/plugins/ctfd-solve-fx",
+  "version": "1.0.0",
+  "author": "xladn0",
+  "repo": "https://github.com/2alf/CTFd-solve-FX"
+}

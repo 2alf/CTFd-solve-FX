@@ -1,0 +1,97 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Solve FX</h1>
+    <p class="lead">Animation & sound when a challenge is solved.</p>
+  </div>
+</div>
+
+<div class="container">
+  <form method="POST" autocomplete="off">
+    <input type="hidden" name="nonce" value="{{ Session.nonce }}">
+
+    <div class="form-group">
+      <label for="preset"><strong>Preset</strong></label>
+      <select class="form-control" name="preset" id="preset">
+        {% for p in presets %}
+          <option value="{{ p }}" {% if config.preset == p %}selected{% endif %}>{{ p }}</option>
+        {% endfor %}
+      </select>
+      <small class="form-text text-muted">
+        The animation style used for solved tiles and the solve celebration.
+        Build your own by registering a preset against <code>window.CTFdSolveFX</code>.
+      </small>
+    </div>
+
+    <hr>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="color"><strong>Effect color</strong></label>
+        <div class="input-group">
+          <input type="color" class="form-control" name="color" id="color" value="{{ config.color }}">
+          <input type="text" class="form-control" name="color" value="{{ config.color }}">
+        </div>
+        <small class="form-text text-muted">Cells, particles.</small>
+      </div>
+      <!-- <div class="form-group col-md-6">
+        <label for="text_color"><strong>Text color</strong></label>
+        <div class="input-group">
+          <input type="color" class="form-control" name="text_color" id="text_color" value="{{ config.text_colort }}">
+          <input type="text" class="form-control" name="text_color" value="{{ config.text_color }}">
+        </div>
+        <small class="form-text text-muted">Text color for labels and subtitles.</small>
+      </div> -->
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+      <label for="label"><strong>Big label</strong></label>
+      <input type="text" class="form-control" name="label" id="label" value="{{ config.label }}">
+    </div>
+
+    <div class="form-group">
+      <label for="sub"><strong>Subtitle</strong></label>
+      <input type="text" class="form-control" name="sub" id="sub" value="{{ config.sub }}">
+    </div>
+
+    <div class="form-group">
+      <label for="tag"><strong>Dismiss hint</strong></label>
+      <input type="text" class="form-control" name="tag" id="tag" value="{{ config.tag }}">
+    </div>
+
+    <hr>
+
+    <div class="form-row align-items-center">
+      <div class="form-group col-md-6">
+        <label for="sound_preset"><strong>Sound</strong></label>
+        <select class="form-control" name="sound_preset" id="sound_preset">
+          {% for s in sounds %}
+            <option value="{{ s }}" {% if config.sound_preset == s %}selected{% endif %}>{{ s }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <div class="form-check mt-4">
+          <input type="checkbox" class="form-check-input" name="sound_enabled" id="sound_enabled"
+                 {% if config.sound_enabled %}checked{% endif %}>
+          <label class="form-check-label" for="sound_enabled"><strong>Sound enabled</strong></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="max_duration_ms"><strong>Max duration (ms)</strong></label>
+      <input type="number" class="form-control" name="max_duration_ms" id="max_duration_ms"
+             value="{{ config.max_duration_ms }}" min="500" max="15000" step="100">
+    </div>
+
+    <hr>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+.solvefx-overlay {
+  position: fixed; inset: 0; z-index: 2147483647;
+  background: rgba(0,0,0,0.92);
+  animation: solvefx-fade-in 0.15s ease-out;
+  cursor: pointer;
+}
+.solvefx-overlay.solvefx-out { animation: solvefx-fade-out 0.6s ease-in forwards; }
+.solvefx-canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }
+.solvefx-text {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; color: var(--solvefx-text-color, #fff);
+  font-family: Raleway, monospace;
+  pointer-events: none;
+}
+.solvefx-label {
+  font-size: clamp(3em, 10vw, 7em);
+  font-weight: 900; letter-spacing: 0.15em;
+  animation: solvefx-pop 0.5s cubic-bezier(.34,1.56,.64,1) both,
+             solvefx-glow 2s ease-in-out infinite 0.5s;
+}
+.solvefx-sub {
+  font-size: clamp(0.9em, 1.5vw, 1.4em);
+  opacity: 0; margin-top: 1.2em; letter-spacing: 0.3em;
+  animation: solvefx-sub 0.5s 0.35s forwards;
+}
+.solvefx-tag {
+  font-size: clamp(0.8em, 1.2vw, 1.1em);
+  opacity: 0; margin-top: 0.4em; letter-spacing: 0.1em;
+  color: var(--solvefx-text-color, #fff);
+  animation: solvefx-sub 0.5s 0.55s forwards;
+}
+@keyframes solvefx-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes solvefx-fade-out { to { opacity: 0; } }
+@keyframes solvefx-pop {
+  0%   { transform: scale(0.2); opacity: 0; filter: blur(30px); }
+  60%  { transform: scale(1.1); opacity: 1; filter: blur(0); }
+  100% { transform: scale(1); }
+}
+@keyframes solvefx-sub { to { opacity: 0.85; } }
